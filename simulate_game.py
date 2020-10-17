@@ -29,11 +29,13 @@ community_chest_opts = [20, 10, 1, 100, -10, 50,
                         2, 3, -50, 4, 10, 100, 50, -100, 200, 25]
 
 # User specified parameters for the simulation
-num_simulations = int(input("Enter the number of simulations to be run \n"))
+num_simulations = int(input("Enter the number of simulations to be run (in multiples of 1000) \n"))
 turns_per_game = int(input("Enter the number of turns per game \n"))
 starting_money = int(input("Enter the starting money amount \n"))
 
-final_results = np.zeros([num_simulations, total_positions])
+divided_simulations = int(num_simulations/1000)
+
+final_results = np.zeros([divided_simulations, total_positions])
 
 def roll_dice():
     first_die_roll = random.randint(dice_min, dice_max)
@@ -199,6 +201,10 @@ def play_turn(doubles_rolled):
             play_turn(doubles_rolled+1)
 
 # Run the simulation
+temp_simulations = 0 
+counter = 0
+temp_results = np.zeros([divided_simulations, total_positions])
+
 for sim in range(0, num_simulations):
 
     # Every new game starts at position 0 with an empty heat map
@@ -218,14 +224,21 @@ for sim in range(0, num_simulations):
     in_jail = False
     jail_turns_skipped = 0
     get_out_of_jail_cards = 0
-
+    
+    
+    
     for turn in range(0, turns_per_game):
         # Skip turns if in Jail
         if in_jail:
             jail_turns_skipped += 1
             jail_turns_skipped %= 3
-
-            if jail_turns_skipped == 0:
+            
+            # Do a dice roll and get out if it is a double
+            dice_roll, is_double = roll_dice()
+            if is_double:
+                jail_turns_skipped = 0
+                in_jail = False
+            elif jail_turns_skipped == 0:
                 # Has completed stay by losing three turns so pays fine
                 current_money -= 50
                 in_jail = False
@@ -236,8 +249,16 @@ for sim in range(0, num_simulations):
         # Play the turn now : 0 is passed to indicate no doubles rolled at turn start
         play_turn(0)
     
-    final_results[sim, :] = heat_map
+    if temp_simulations < divided_simulations:
+        temp_results[temp_simulations, :] = heat_map
+        temp_simulations += 1
+    else:
+        temp_simulations = 0
+        if counter < 1000:
+            final_results[counter, :] = np.average(temp_results, axis=0)
+        counter += 1
 
 file_name = "Results_"+str(num_simulations)+".csv"
 np.savetxt(file_name, final_results, delimiter=",")
+
 
