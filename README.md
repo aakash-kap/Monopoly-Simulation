@@ -42,3 +42,5 @@ The probability distribution graphs for arriving at a certain property are as fo
 We get the Value for Money of the different groups as shown in the graph below
 
 ![](/Graphs/Value_for_Money.png)
+
+Clearly, it lends a lot of credence to the idea that Mayfair/Park Lane and the Railway Stations are among the best you can buy in the game. 
