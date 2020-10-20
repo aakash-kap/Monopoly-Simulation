@@ -20,7 +20,25 @@ The reasoning takes into account the following -
 * Finally, we come to hotels houses and this is another heavy expense which again becomes tough to model really.
 
 ## Results 
+The expected gains/losses per round can be calculated as a sum of the following -
+* Earnings from crossing Go *= 200*
+* Losses from Income Taxes *= -200, -100*
+* Average Gains/Losses from Chance *= +21.5174*
+* Average Gains/Losses from Community Chest *= +37.8125*
+
+*(As this is a single player simulation, we do not have losses and earnings from rent)*
+
+Multiplying by the probability of visiting each per round, we get the folliwing rough estimate - 
+Net Gain Per Round = 3.3235
 
 #### Probability Distribution Graphs
+The probability distribution graphs for arriving at a certain property are as follows 
+
+![](/Graphs/Distribution_Col.png)
+
+![](/Graphs/Distribution_Line.png)
 
 #### Value for Money of Different Property Groups
+We get the Value for Money of the different groups as shown in the graph below
+
+![](/Graphs/Value_for_Money.png)
