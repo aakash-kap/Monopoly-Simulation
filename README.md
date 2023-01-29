@@ -8,10 +8,20 @@ Different positions in the board are referred to by their index position in a 40
 ## Value for Money and Return on Investment
 Obviously, the probability distribution is not of much significance without mentioning the value for money and return on investment provided by each property group. This was calculated by the formula, 
 
-![](Formula.jpg)
+$$V = -L_{R} * \max(T_{acq}) + \sum_{i=0}^{n-1} R_{i}(T_{acq, max} - T_{acq, i}) + (\sum_{i=0}^{n-1} R_{max} - C_{tot})/nT_{acq, max}$$
 
-where,
-![](Legend.jpg)
+where, 
+
+$V =$ Value, 
+$L_{R}$ = Expected Losses Per Round, 
+
+$T_{acq}$ = Time to Acquire a Property (rounds),
+
+$n$ = Number of Properties in a Group,
+
+$R_{i}$ = Rent of $i$-th property,
+
+$C_{tot}$ = Total cost of making maximum upgrades to a property
 
 The reasoning takes into account the following - 
 * The costlier the property, the higher the rent. Thus, there needs to be a linear dependence term here.
